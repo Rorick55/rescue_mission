@@ -1,0 +1,26 @@
+<h3><%=@question.subject%></h3>
+
+<p>Creater: <%=@question.creater%></p>
+<p>Question: <%=@question.body%></p><br/>
+
+<h3>Add an answer:</h3>
+
+<%= form_for [@question, @answer] do |f| %>
+  <%= f.label :creater %>: <br/>
+  <%= f.text_area :creater %><br/>
+
+  <%= f.label :body %><br/>
+  <%= f.text_area :body %><br/>
+
+  <%= f.submit %>
+<%end%>
+<br/>
+
+<h3>Answers:</h3>
+
+<% @question.answers.each do |answer|%>
+  <p>
+    <%=answer.creater%> responds: <%=answer.body%>
+    <%= link_to 'Delete', question_answer_path(@question, answer), method: :delete %>
+  </p>
+<%end%>

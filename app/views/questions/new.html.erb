@@ -1,0 +1,14 @@
+<h4>Add a Question</h4>
+
+<%= form_for @question do |f| %>
+  <%= f.label :creater %>
+  <%= f.text_field :creater %>
+
+  <%= f.label :subject %>
+  <%= f.text_field :subject %>
+
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+
+  <%= f.submit %>
+<%end%>
