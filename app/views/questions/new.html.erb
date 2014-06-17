@@ -1,14 +1,24 @@
-<h4>Add a Question</h4>
+<br/>
+<br/>
+<%if @question.errors.any?%>
+  <%@question.errors.full_messages.each do |msg|%>
+   <%= msg%><br/>
+  <%end%>
+<%end%>
+
+<h4>Create a Question</h4>
 
 <%= form_for @question do |f| %>
-  <%= f.label :creater %>
-  <%= f.text_field :creater %>
+  <%= f.label :creater %>:<br/>
+  <%= f.text_field :creater%><br/>
 
-  <%= f.label :subject %>
-  <%= f.text_field :subject %>
+  <%= f.label :subject %>:<br/>
+  <%= f.text_area :subject%><br/>
 
-  <%= f.label :body %>
-  <%= f.text_field :body %>
+  <%= f.label :body %>:<br/>
+  <%= f.text_area :body%><br/>
 
   <%= f.submit %>
 <%end%>
+
+

@@ -9,6 +9,11 @@
 <body>
 <a href="/questions">Home</a><br/>
 <a href="/questions/new">Add a question</a>
+<% if flash.any? %>
+  <div>
+    <h2><%= flash[:notice] %></h2>
+  </div>
+<% end %>
 <%= yield %>
 
 </body>

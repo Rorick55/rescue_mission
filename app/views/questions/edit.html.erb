@@ -1,0 +1,25 @@
+
+<%if @question.errors.any?%>
+<br/>
+<br/>
+  <%@question.errors.full_messages.each do |msg|%>
+   <%= msg%><br/>
+  <%end%>
+<%end%>
+
+<h4>Edit a Question</h4>
+
+<%= form_for @question do |f| %>
+  <%= f.label :creater %>:<br/>
+  <%= f.text_field :creater, value: @question.creater %><br/>
+
+  <%= f.label :subject %>:<br/>
+  <%= f.text_area :subject, value: @question.subject %><br/>
+
+  <%= f.label :body %>:<br/>
+  <%= f.text_area :body, value: @question.body %><br/>
+
+  <%= f.submit %>
+
+<%end%>
+<%= link_to 'Delete', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}%>

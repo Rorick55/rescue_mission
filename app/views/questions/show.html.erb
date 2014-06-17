@@ -1,16 +1,24 @@
 <h3><%=@question.subject%></h3>
 
 <p>Creater: <%=@question.creater%></p>
-<p>Question: <%=@question.body%></p><br/>
-
+<p>Question: <%=@question.body%>
+  <a href="/questions/<%="#{params[:id]}"%>/edit">edit</a>
+  <%= link_to 'delete', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}%>
+</p>
 <h3>Add an answer:</h3>
 
-<%= form_for [@question, @answer] do |f| %>
-  <%= f.label :creater %>: <br/>
-  <%= f.text_area :creater %><br/>
+<%if @answer.errors.any?%>
+  <%@answer.errors.full_messages.each do |msg|%>
+   <%= msg%><br/>
+  <%end%>
+<%end%>
 
-  <%= f.label :body %><br/>
-  <%= f.text_area :body %><br/>
+<%= form_for [@question, @answer] do |f| %>
+  <%= f.label :creater %>:
+  <%= f.text_field :creater %>
+
+  <%= f.label :body %>
+  <%= f.text_field :body %>
 
   <%= f.submit %>
 <%end%>
@@ -21,6 +29,6 @@
 <% @question.answers.each do |answer|%>
   <p>
     <%=answer.creater%> responds: <%=answer.body%>
-    <%= link_to 'Delete', question_answer_path(@question, answer), method: :delete %>
+    <%= link_to 'delete', question_answer_path(@question, answer), method: :delete, data: {confirm: 'Are you sure?'}%>
   </p>
 <%end%>

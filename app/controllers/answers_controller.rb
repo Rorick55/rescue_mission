@@ -6,18 +6,25 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
 
     @answer.question = @question
-    @answer.save
-    redirect_to "/questions/#{params[:question_id]}"
+    if @answer.save
+      flash[:notice] = "Your answer has been saved"
+      redirect_to @question
+    else
+      render 'questions/show'
+    end
   end
 
   def destroy
     @question = Question.find(params[:question_id])
     @answer = Answer.find(params[:id])
     @answer.question = @question
-    @answer.destroy
-
-
-    redirect_to "questions/#{params[:question_id]}"
+    if @answer.destroy
+      flash[:notice] = "Answer has been deleted."
+      redirect_to @question
+    else
+      flash[:notice] = "Answer could not be deleted."
+      redirect_to @question
+    end
   end
 
   def answer_params
